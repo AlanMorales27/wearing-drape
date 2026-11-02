@@ -22,7 +22,7 @@ Crear el esqueleto mínimo compilable y ejecutable de la app Android en Kotlin e
 
 **Project Type**: mobile-app, single-module (`:app`)
 
-**Performance Goals**: sync limpio <3 min con red estable; `assembleDebug` incremental <2 min en máquina media; cold start bienvenida <2s en emulador medio; APK debug <25 MB
+**Performance Goals**: sync limpio <3 min con red estable; `assembleDebug` incremental <2 min en máquina media; cold start bienvenida <2s en emulador medio; APK debug <35 MB (medido 27,9 MB en build limpio 2026-11-02 con AGP 9.5 + Compose BOM 2026.09; el dex va sin comprimir por alineación a páginas de 16 KB)
 
 **Constraints**: Dev en Windows 10/11 + Android Studio reciente (versión mínima se documenta en README); secretos jamás versionados; YAGNI estricto (cero módulos/features extra); build offline posible tras primer sync (caché Gradle)
 

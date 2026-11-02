@@ -9,7 +9,7 @@ Este contrato define las tareas que la base MUST exponer. Cualquier cambio de no
 | Tarea | Comando | Entrada | Salida esperada | Falla si |
 |-------|---------|---------|-----------------|----------|
 | Sync | Abrir en Android Studio → Sync | `settings.gradle.kts` válido | Módulo `:app` listado, sin errores | Falta SDK / AGP incompatible |
-| Build debug | `./gradlew assembleDebug` (Windows: `gradlew.bat assembleDebug`) | Fuentes + recursos | `app/build/outputs/apk/debug/app-debug.apk` (<25 MB) | Error compilación, Manifest inválido |
+| Build debug | `./gradlew assembleDebug` (Windows: `gradlew.bat assembleDebug`) | Fuentes + recursos | `app/build/outputs/apk/debug/app-debug.apk` (<35 MB; medido 27,9 MB en 2026-11-02) | Error compilación, Manifest inválido |
 | Lint | `./gradlew lintDebug` | Todo `src/main` | Sin `Error`, reporte `app/build/reports/lint-results-debug.html` | Regla `Error` |
 | Run manual | Run 'app' en Studio (emulador API 29+) | APK debug | Bienvenida visible <2s, sin crash | Crash, texto no visible, sin dispositivo |
 

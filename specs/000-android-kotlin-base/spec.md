@@ -8,6 +8,12 @@
 
 **Input**: User description: "Quiero que crees el spec 000 para crear el proyecto en kotlin, quiero un proyecto para android en kotlin, solo quiero crear las carpetas bassicas y lo necesario para que corra el proyecto"
 
+## Clarifications
+
+### Session 2026-11-02
+
+- Q: ¿Cuál debe ser el valor canónico de `minSdk` para la base 000 (y como referencia para 001)? → A: `minSdk 29` (Android 10) — lo ya implementado y validado.
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Obtener esqueleto de proyecto que abre sin errores (Priority: P1)
@@ -100,7 +106,7 @@ Como desarrollador quiero que la base mínima ya respete las reglas transversale
 - Se asume Gradle con wrapper incluido para no depender de una instalación global de Gradle.
 - Se asume paquete base `com.wearingdrape.app` salvo que el autor indique otro durante la revisión del plan.
 - Se asume UI mínima con la plantilla oficial actual de Android (Compose Material3). Si la plantilla oficial cambia, se usa la opción por defecto más simple sin navegación ni pantallas extra.
-- Se asume SDK mínimo 26 y SDK objetivo/compilación con la versión estable soportada por el Android Gradle Plugin elegido; se documentan en el README.
+- Se asume SDK mínimo 29 (Android 10, decisión del autor confirmada en clarificación 2026-11-02) y SDK objetivo/compilación con la versión estable soportada por el Android Gradle Plugin elegido; se documentan en el README.
 - Se asume que este spec no crea tablas Supabase, políticas RLS, ni integración LLM; esas llegarán en specs posteriores (p. ej. 001).
 - Se asume control de versiones git ya inicializado en la carpeta (repositorio wearing-drape existente).
 - Se asume explícitamente sin tests automatizados en 000 por decisión del autor (2026-11-02); no se agregan dependencias ni source-sets de test.

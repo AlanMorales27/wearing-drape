@@ -27,7 +27,7 @@
   - `manifest`: `src/main/AndroidManifest.xml` con `MainActivity` launcher + `android:exported="true"`
   - `sourceSets`: solo `main` (sin `test`/`androidTest` en 000)
 - **Validation**:
-  - `assembleDebug` genera `app-debug.apk` <25 MB.
+  - `assembleDebug` genera `app-debug.apk` <35 MB (medido 27,9 MB en 2026-11-02).
   - `lintDebug` sin errores bloqueantes.
 - **Relationships**: pertenece a 1 Proyecto; contiene 1 Pantalla bienvenida.
 

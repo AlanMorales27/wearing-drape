@@ -1,0 +1,25 @@
+# Build outputs
+/build/
+/app/build/
+.gradle/
+*.iml
+.idea/
+local.properties
+*.jks
+*.keystore
+*.p8
+# Android / Kotlin
+*.apk
+*.aab
+*.ap_
+# Secrets / env
+.env
+.env.*
+secrets.properties
+# Logs
+*.log
+# OS
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp

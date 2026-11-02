@@ -17,13 +17,13 @@
 
 **Purpose**: Gradle raíz, versionado e higiene base — sin código de app todavía.
 
-- [ ] T001 Create settings with `include(":app")` and central repos in `settings.gradle.kts`
-- [ ] T002 [P] Create root plugins/clean task in `build.gradle.kts`
-- [ ] T003 [P] Create version catalog pinning AGP, Kotlin, Compose BOM in `gradle/libs.versions.toml`
-- [ ] T004 [P] Create Gradle flags (AndroidX, JVM `-Xmx3g`) in `gradle.properties`
-- [ ] T005 Setup Gradle wrapper executables and config in `gradlew`, `gradlew.bat`, `gradle/wrapper/gradle-wrapper.properties`
-- [ ] T006 [P] Create ignore rules for build outputs and secrets in `.gitignore`
-- [ ] T007 [P] Create local SDK template with commented `sdk.dir` in `local.properties.example`
+- [X] T001 Create settings with `include(":app")` and central repos in `settings.gradle.kts`
+- [X] T002 [P] Create root plugins/clean task in `build.gradle.kts`
+- [X] T003 [P] Create version catalog pinning AGP, Kotlin, Compose BOM in `gradle/libs.versions.toml`
+- [X] T004 [P] Create Gradle flags (AndroidX, JVM `-Xmx3g`) in `gradle.properties`
+- [X] T005 Setup Gradle wrapper executables and config in `gradlew`, `gradlew.bat`, `gradle/wrapper/gradle-wrapper.properties`
+- [X] T006 [P] Create ignore rules for build outputs and secrets in `.gitignore`
+- [X] T007 [P] Create local SDK template with commented `sdk.dir` in `local.properties.example`
 
 ---
 
@@ -33,11 +33,11 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T008 Create app build config with namespace `com.wearingdrape.app`, minSdk 29, Compose in `app/build.gradle.kts`
-- [ ] T009 Create launcher manifest with exported MainActivity in `app/src/main/AndroidManifest.xml`
-- [ ] T010 [P] Create minimal ComponentActivity shell in `app/src/main/java/com/wearingdrape/app/MainActivity.kt`
-- [ ] T011 [P] Create app name strings in `app/src/main/res/values/strings.xml`
-- [ ] T012 [P] Create Material3 theme in `app/src/main/res/values/themes.xml`
+- [X] T008 Create app build config with namespace `com.wearingdrape.app`, minSdk 29, Compose in `app/build.gradle.kts`
+- [X] T009 Create launcher manifest with exported MainActivity in `app/src/main/AndroidManifest.xml`
+- [X] T010 [P] Create minimal ComponentActivity shell in `app/src/main/java/com/wearingdrape/app/MainActivity.kt`
+- [X] T011 [P] Create app name strings in `app/src/main/res/values/strings.xml`
+- [X] T012 [P] Create Material3 theme in `app/src/main/res/values/themes.xml`
 
 **Checkpoint**: Foundation ready — Studio lista `:app` en Project view y `Sync` termina sin errores. User stories pueden empezar.
 
@@ -49,8 +49,8 @@
 
 **Independent Test**: Abrir carpeta raíz en Studio → Sync OK y módulo `app` listado; árbol sin carpetas especulativas (ver `specs/000-android-kotlin-base/quickstart.md` paso 1).
 
-- [ ] T013 [US1] Validate Studio sync and `:app` listing per `specs/000-android-kotlin-base/quickstart.md`
-- [ ] T014 [P] [US1] Audit versioned tree for YAGNI (no `src/test`, no `src/androidTest`, no módulos extra) per `specs/000-android-kotlin-base/spec.md` FR-009
+- [X] T013 [US1] Validate Studio sync and `:app` listing per `specs/000-android-kotlin-base/quickstart.md`
+- [X] T014 [P] [US1] Audit versioned tree for YAGNI (no `src/test`, no `src/androidTest`, no módulos extra) per `specs/000-android-kotlin-base/spec.md` FR-009
 
 **Checkpoint**: US1 funcional y testeable sola — Sync verde aunque la pantalla aún sea placeholder.
 
@@ -62,11 +62,11 @@
 
 **Independent Test**: `gradlew.bat assembleDebug` + `lintDebug` en verde y Run en emulador API 29+ muestra bienvenida <2s, sin crash ni pantalla negra (ver `specs/000-android-kotlin-base/contracts/app-launch-contract.md` y `contracts/build-tasks-contract.md`).
 
-- [ ] T015 [P] [US2] Create welcome screen composable in `app/src/main/java/com/wearingdrape/app/ui/welcome/WelcomeScreen.kt`
-- [ ] T016 [US2] Wire MainActivity content to WelcomeScreen with Material3 theme in `app/src/main/java/com/wearingdrape/app/MainActivity.kt`
-- [ ] T017 [P] [US2] Add launcher icon assets in `app/src/main/res/mipmap-*/`
-- [ ] T018 [US2] Validate `assembleDebug` + `lintDebug` green per `specs/000-android-kotlin-base/contracts/build-tasks-contract.md`
-- [ ] T019 [US2] Validate manual Run on API 29+ emulator per `specs/000-android-kotlin-base/contracts/app-launch-contract.md` and `specs/000-android-kotlin-base/quickstart.md`
+- [X] T015 [P] [US2] Create welcome screen composable in `app/src/main/java/com/wearingdrape/app/ui/welcome/WelcomeScreen.kt`
+- [X] T016 [US2] Wire MainActivity content to WelcomeScreen with Material3 theme in `app/src/main/java/com/wearingdrape/app/MainActivity.kt`
+- [X] T017 [P] [US2] Add launcher icon assets in `app/src/main/res/mipmap-*/`
+- [X] T018 [US2] Validate `assembleDebug` + `lintDebug` green per `specs/000-android-kotlin-base/contracts/build-tasks-contract.md`
+- [X] T019 [US2] Validate manual Run on API 29+ emulator per `specs/000-android-kotlin-base/contracts/app-launch-contract.md` and `specs/000-android-kotlin-base/quickstart.md`
 
 **Checkpoint**: US1 + US2 = MVP completo — app instalable y visible. Si esto falla, la base es inválida (SC-002).
 
@@ -78,9 +78,9 @@
 
 **Independent Test**: `git ls-files | findstr local.properties` vacío y búsqueda de `supabase|service_role|api_key` en `app/src` con 0 resultados; `ui/welcome/` evidente para 001 (ver `specs/000-android-kotlin-base/quickstart.md` paso 4).
 
-- [ ] T020 [US3] Verify secrets hygiene (`local.properties` ignored, no keys in repo) in `.gitignore` and `local.properties.example`
-- [ ] T021 [P] [US3] Document future secrets location (SUPABASE_URL/ANON_KEY, nunca service_role) in `README.md`
-- [ ] T022 [P] [US3] Document `ui/` extension point for spec 001 without creating ViewModels/repos in `README.md`
+- [X] T020 [US3] Verify secrets hygiene (`local.properties` ignored, no keys in repo) in `.gitignore` and `local.properties.example`
+- [X] T021 [P] [US3] Document future secrets location (SUPABASE_URL/ANON_KEY, nunca service_role) in `README.md`
+- [X] T022 [P] [US3] Document `ui/` extension point for spec 001 without creating ViewModels/repos in `README.md`
 
 **Checkpoint**: Las 3 historias funcionan; la base no requerirá reestructurar para 001.
 
@@ -90,10 +90,10 @@
 
 **Purpose**: README final, auditoría SC-003/SC-004 y validación quickstart.
 
-- [ ] T023 Complete README with prerequisites, Open/Sync/Run and Windows troubleshooting in `README.md`
-- [ ] T024 [P] Audit final tree for SC-004 (100% archivos necesarios) per `specs/000-android-kotlin-base/plan.md`
-- [ ] T025 [P] Audit repo for SC-003 (0 secretos versionados) via `git ls-files` and text search in `app/src`
-- [ ] T026 Run end-to-end `specs/000-android-kotlin-base/quickstart.md` validation and record SC-001 time (<10 min)
+- [X] T023 Complete README with prerequisites, Open/Sync/Run and Windows troubleshooting in `README.md`
+- [X] T024 [P] Audit final tree for SC-004 (100% archivos necesarios) per `specs/000-android-kotlin-base/plan.md`
+- [X] T025 [P] Audit repo for SC-003 (0 secretos versionados) via `git ls-files` and text search in `app/src`
+- [X] T026 Run end-to-end `specs/000-android-kotlin-base/quickstart.md` validation and record SC-001 time (<10 min)
 
 ---
 
@@ -180,3 +180,4 @@ REM Task T018: "Validate assembleDebug + lintDebug per specs/000-android-kotlin-
 - Commit after each task or logical group
 - Stop at any checkpoint to validate story independently
 - Avoid: vague tasks, same file conflicts, cross-story dependencies that break independence
+

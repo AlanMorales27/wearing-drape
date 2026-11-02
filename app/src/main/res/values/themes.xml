@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme (spec 000). Material3 surfaces are provided
+         by the Compose MaterialTheme in WelcomeScreen; this theme only
+         covers the Activity window background for a clean launch. -->
+    <style name="Theme.wearingdrape" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+</resources>
