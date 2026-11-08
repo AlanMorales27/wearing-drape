@@ -12,7 +12,7 @@ Persistencia solo local (Room + ficheros internos). Usuario único implícito, s
   - `name`: String, obligatorio, 1–60 caracteres.
   - `generalKey`: String enum (`SUPERIOR | INFERIOR | CALZADO | ACCESORIO`), obligatorio.
   - `specific`: String snapshot (p. ej. "camiseta"), obligatorio; MUST pertenecer al catálogo de su `generalKey`.
-  - `color`: String libre descriptivo, obligatorio, 1–40 caracteres.
+   - `color`: String con el hexadecimal elegido en el picker (`Catalog.colorOptions`). Obligatorio.
   - `fit`: String snapshot opcional (nullable); si se informa, MUST pertenecer a los fits de su `generalKey`.
   - `notes`: String opcional (observaciones), 0–500 caracteres.
   - `photoPath`: String opcional (ruta relativa en `filesDir/closet/`); 1 foto por prenda en v1. Si la foto falta/inaccesible, la prenda sigue válida y muestra marcador (edge spec).

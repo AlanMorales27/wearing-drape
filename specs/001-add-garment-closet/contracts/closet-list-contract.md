@@ -4,13 +4,19 @@
 
 La lista existe solo para probar "la prenda queda registrada y puede volver a verse" (US1-A1). Buscar/editar/borrar quedan fuera (spec Assumptions).
 
-## UI state (`ClosetListUiState`)
+## UI state (`ClosetListUiState`, filtrado por el tab activo)
 
 | Estado | Contenido |
 |---|---|
 | `Empty` | Ilustración/texto "aún no hay prendas" + CTA "Agregar prenda" |
-| `Content(items)` | Tarjetas con miniatura (o marcador si `photoPath` inaccesible), `name`, `specific`, `color`; orden `createdAt` desc |
+| `Content(items)` | Tarjetas con miniatura (o marcador si `photoPath` inaccesible), muestra de color + `name`, `specific`, `color` (hex); orden `createdAt` desc |
 | `Saving` | Tras volver de `addGarment` con `OK`: snackbar "Prenda guardada" |
+
+## Tabs (filtro por tipo general, US1-A4)
+
+- Tabs fijos: `Todas` + un tab por `GarmentGeneral` (`SUPERIOR`, `INFERIOR`, `CALZADO`, `ACCESORIO`).
+- `Todas` muestra todo el closet; cada tab de grupo muestra solo prendas con ese `generalKey`.
+- El tab activo filtra `Empty`/`Content`: un grupo sin prendas muestra `Empty`.
 
 ## Reglas
 

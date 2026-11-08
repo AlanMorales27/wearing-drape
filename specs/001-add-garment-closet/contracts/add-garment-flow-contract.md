@@ -16,7 +16,7 @@ Contrato del formulario `addGarment`: eventos que suben, estado que baja (UDF), 
 | `name` | String | 1–60; obligatorio |
 | `generalKey` | `SUPERIOR\|INFERIOR\|CALZADO\|ACCESORIO\|null` | obligatorio; punto de partida del filtrado |
 | `specific` | String? | obligatorio; MUST ∈ `specificsByGeneral[generalKey]` |
-| `color` | String | 1–40; obligatorio |
+| `color` | String hexadecimal "#RRGGBB" | obligatorio; se elige desde el picker (sin texto libre) |
 | `fit` | String? | opcional; si presente y el grupo tiene sugerencias, MUST ∈ `fitsByGeneral[generalKey]` |
 | `notes` | String | opcional, 0–500 |
 | `photoUri` | Uri? | opcional pero invitada; 1 foto; JPEG/PNG/WebP ≤5 MB |

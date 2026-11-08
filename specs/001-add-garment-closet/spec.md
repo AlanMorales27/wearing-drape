@@ -12,15 +12,16 @@
 
 ### User Story 1 - Guardar una prenda con sus datos básicos (Priority: P1)
 
-El usuario abre la opción "agregar prenda", sube una foto de la prenda, le asigna un nombre, elige el tipo general (superior, inferior, calzado, accesorio), elige el tipo específico dentro de ese grupo, indica el color y guarda. La prenda queda registrada en su closet y puede volver a verla después.
+El usuario abre la opción "agregar prenda", sube una foto de la prenda, le asigna un nombre, elige el tipo general (superior, inferior, calzado, accesorio), elige el tipo específico dentro de ese grupo, elige el color desde un picker con paleta predefinida de hexadecimales y guarda. La prenda queda registrada en su closet y puede volver a verla después (la tarjeta muestra la muestra del color).
 
 **Why this priority**: Es el valor central de la feature: sin guardar prendas no existe closet. Todo lo demás (filtros, fits, observaciones) depende de que esto funcione.
 
 **Acceptance Scenarios**:
 
-1. **Given** que el usuario está en el formulario de nueva prenda, **When** completa nombre, tipo general, tipo específico, color y adjunta una foto válida, **Then** el sistema guarda la prenda y la muestra en su closet.
+1. **Given** que el usuario está en el formulario de nueva prenda, **When** completa nombre, tipo general, tipo específico, elige un color del picker y adjunta una foto válida, **Then** el sistema guarda la prenda y la muestra en su closet.
 2. **Given** que el usuario intenta guardar sin nombre o sin tipo general o sin tipo específico o sin color, **When** confirma el guardado, **Then** el sistema rechaza el guardado y le indica qué campo falta.
 3. **Given** que el usuario adjunta un archivo que no es imagen o es excesivamente grande, **When** intenta guardarlo, **Then** el sistema rechaza esa foto con un mensaje claro y no pierde el resto de los datos ingresados.
+4. **Given** que el closet tiene prendas de varios tipos generales, **When** el usuario toca cada tab (Todas, prenda superior, prenda inferior, calzado, accesorio), **Then** solo ve las prendas de ese grupo (Todas las muestra todas).
 
 ---
 
@@ -62,7 +63,7 @@ El usuario puede, si quiere, indicar el fit de la prenda (oversize, boxy, loose 
 - ¿Cómo maneja el sistema la pérdida de conexión a mitad del guardado (especialmente subiendo la foto)? No guarda una prenda a medias: o se guarda completa (datos + foto) o no se guarda y avisa al usuario.
 - ¿Qué pasa si el catálogo de un tipo general aún no tiene tipos específicos o fits definidos? El selector muestra un estado vacío con mensaje ("aún no hay opciones para este grupo") en lugar de fallar o mostrar opciones de otro grupo.
 - ¿Qué pasa si la foto se elimina o queda inaccesible después de guardada? La prenda sigue existiendo con sus datos y muestra un marcador de imagen no disponible.
-- ¿Qué pasa con textos muy largos en nombre, color u observaciones? El sistema aplica límites máximos y los informa antes de guardar.
+- ¿Qué pasa con textos muy largos en nombre u observaciones? El sistema aplica límites máximos y los informa antes de guardar (el color no tiene este problema: viene del picker, sin texto libre).
 - ¿Qué pasa si el usuario cancela a mitad del formulario? No se guarda nada y se le confirma que los cambios no guardados se perderán.
 
 ## Requirements *(mandatory)*
@@ -79,7 +80,7 @@ El usuario puede, si quiere, indicar el fit de la prenda (oversize, boxy, loose 
 - **FR-008**: El sistema MUST validar límites de tamaño de foto y de longitud de texto (nombre, color, observaciones) e informar al usuario cuando los exceda, sin perder los demás datos del formulario.
 - **FR-009**: Cada prenda guardada MUST pertenecer a un único usuario y solo ese usuario MUST poder verla y gestionarla.
 - **FR-010**: El sistema MUST conservar la foto junto con los datos de la prenda de modo que al reabrir la prenda se vean juntos.
-- **FR-011**: El campo color MUST aceptar un valor descriptivo definido por el usuario (p. ej. "azul oscuro", "beige") con una longitud máxima definida.
+- **FR-011**: El campo color MUST ser un picker con paleta predefinida de hexadecimales; el usuario MUST elegir un color de la paleta, no escribir texto libre. El valor guardado es el hexadecimal ("#RRGGBB").
 - **FR-012**: El sistema MUST impedir el guardado parcial: si falla la subida de la foto o la validación de datos, ninguna prenda incompleta queda registrada como válida.
 - **FR-013**: El catálogo de tipos generales, tipos específicos y fits sugeridos MUST ser gestionable (se pueden agregar nuevas opciones por grupo) sin modificar prendas ya guardadas.
 
@@ -104,7 +105,7 @@ El usuario puede, si quiere, indicar el fit de la prenda (oversize, boxy, loose 
 
 - El usuario está autenticado cuando agrega prendas; cada closet es personal y privado por defecto.
 - La foto es opcional pero fuertemente recomendada: se puede guardar una prenda sin foto, pero el formulario invita a subirla. Límite razonable por defecto: 1 foto por prenda en la primera versión, formatos de imagen comunes, tamaño máximo de unos pocos MB.
-- El color se captura como texto libre descriptivo (no se exige una paleta cerrada en la primera versión); se normaliza solo para visualización (sin validación cromática estricta).
+- El color se elige desde un picker con paleta predefinida de hexadecimales (sin texto libre); la paleta inicial es: #000000, #FFFFFF, #9E9E9E, #1E3A8A, #29B6F6, #D32F2F, #2E7D32, #F5F5DC, #795548, #F48FB1, #FFEB3B, #7B1FA2. Más opciones pueden agregarse sin cambiar esta spec.
 - El catálogo inicial incluye al menos: superior → camiseta, camisa, chaqueta, sudadera, jersey; inferior → jean, pantalón, short, falda; calzado → tenis, botas, zapatos, sandalias; accesorio → gorro, gorra, cinturón, bufanda. Más opciones pueden agregarse sin cambiar esta spec.
 - Los fits iniciales sugeridos: superior → oversize, boxy, regular, slim; inferior → loose fit, baggy fit, slim, recto, skinny; calzado y accesorio → sin fits sugeridos obligatorios (campo libre u oculto según grupo).
 - Solo se contempla "agregar/guardar" en esta feature; listar, editar, eliminar y buscar prendas quedan fuera de alcance y se tratarán en features separadas.

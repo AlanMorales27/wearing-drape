@@ -25,9 +25,9 @@
 
 **Purpose**: Dependencias nuevas pineadas y build en verde antes de picar feature
 
-- [ ] T001 Add Room + navigation-compose + coil-compose + KSP versions to `gradle/libs.versions.toml` (versiones compatibles con Kotlin 2.2.10 / AGP 9.5.0 / Compose BOM 2026.09, anotadas con fecha)
-- [ ] T002 Configure `app/build.gradle.kts` (aplica plugin KSP, añade deps room-runtime + room-ktx, navigation-compose, coil-compose, lifecycle-viewmodel-compose; mantiene compose buildFeatures existente)
-- [ ] T003 Verify `gradlew.bat assembleDebug` succeeds with new dependencies from repo root
+- [X] T001 Add Room + navigation-compose + coil-compose + KSP versions to `gradle/libs.versions.toml` (versiones compatibles con Kotlin 2.2.10 / AGP 9.5.0 / Compose BOM 2026.09, anotadas con fecha)
+- [X] T002 Configure `app/build.gradle.kts` (aplica plugin KSP, añade deps room-runtime + room-ktx, navigation-compose, coil-compose, lifecycle-viewmodel-compose; mantiene compose buildFeatures existente)
+- [X] T003 Verify `gradlew.bat assembleDebug` succeeds with new dependencies from repo root
 
 ---
 
@@ -37,14 +37,14 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T004 [P] Create `GarmentGeneral` enum + catalog maps in `app/src/main/java/com/wearingdrape/app/data/Catalog.kt` (generales `SUPERIOR | INFERIOR | CALZADO | ACCESORIO`; seed verbatim — superior: camiseta, camisa, chaqueta, sudadera, jersey; inferior: jean, pantalón, short, falda; calzado: tenis, botas, zapatos, sandalias; accesorio: gorro, gorra, cinturón, bufanda; fits superior: oversize, boxy, regular, slim; fits inferior: loose fit, baggy fit, slim, recto, skinny; calzado/accesorio sin sugerencias)
-- [ ] T005 [P] Create `GarmentEntity` in `app/src/main/java/com/wearingdrape/app/data/GarmentEntity.kt` (campos verbatim data-model: `id` Long PK auto, `name` 1–60 obligatorio, `generalKey` String enum obligatorio, `specific` String snapshot obligatorio, `color` 1–40 obligatorio, `fit` String? opcional, `notes` 0–500 opcional, `photoPath` String? opcional 1 foto, `ownerId` String default `"local"`, `createdAt` Long epoch-ms)
-- [ ] T006 Create `GarmentDao` in `app/src/main/java/com/wearingdrape/app/data/GarmentDao.kt` (depends on T005: `insert` suspend + `observeAll` Flow ordenado por `createdAt` desc)
-- [ ] T007 Create `AppDatabase` in `app/src/main/java/com/wearingdrape/app/data/AppDatabase.kt` (depends on T005/T006: RoomDatabase con `entities=[GarmentEntity]`, version 1; documenta política `exportSchema`)
-- [ ] T008 [P] Create `FilePhotoDataSource` in `app/src/main/java/com/wearingdrape/app/data/FilePhotoDataSource.kt` (copia a `filesDir/closet/` como `garment_<id>_<timestamp>.<ext>`; valida JPEG/PNG/WebP y `≤5 MB`; borra el fichero copiado si el insert posterior falla)
-- [ ] T009 Create `StaticCatalogDataSource` in `app/src/main/java/com/wearingdrape/app/data/StaticCatalogDataSource.kt` (depends on T004: expone `specificsByGeneral` y `fitsByGeneral` desde `Catalog.kt`)
-- [ ] T010 Create `GarmentRepository` in `app/src/main/java/com/wearingdrape/app/data/GarmentRepository.kt` (depends on T006–T009: único punto de entrada a Data; expone `Flow<List<Garment>>`; `save()` valida obligatorios y hace guardado atómico copia-foto→insert sin fila parcial)
-- [ ] T011 Create `Application` holder + register in `app/src/main/AndroidManifest.xml` (depends on T007/T010: singleton de `AppDatabase`/repositorio para factory manual de ViewModels, sin Hilt/Koin)
+- [X] T004 [P] Create `GarmentGeneral` enum + catalog maps in `app/src/main/java/com/wearingdrape/app/data/Catalog.kt` (generales `SUPERIOR | INFERIOR | CALZADO | ACCESORIO`; seed verbatim — superior: camiseta, camisa, chaqueta, sudadera, jersey; inferior: jean, pantalón, short, falda; calzado: tenis, botas, zapatos, sandalias; accesorio: gorro, gorra, cinturón, bufanda; fits superior: oversize, boxy, regular, slim; fits inferior: loose fit, baggy fit, slim, recto, skinny; calzado/accesorio sin sugerencias)
+- [X] T005 [P] Create `GarmentEntity` in `app/src/main/java/com/wearingdrape/app/data/GarmentEntity.kt` (campos verbatim data-model: `id` Long PK auto, `name` 1–60 obligatorio, `generalKey` String enum obligatorio, `specific` String snapshot obligatorio, `color` 1–40 obligatorio, `fit` String? opcional, `notes` 0–500 opcional, `photoPath` String? opcional 1 foto, `ownerId` String default `"local"`, `createdAt` Long epoch-ms)
+- [X] T006 Create `GarmentDao` in `app/src/main/java/com/wearingdrape/app/data/GarmentDao.kt` (depends on T005: `insert` suspend + `observeAll` Flow ordenado por `createdAt` desc)
+- [X] T007 Create `AppDatabase` in `app/src/main/java/com/wearingdrape/app/data/AppDatabase.kt` (depends on T005/T006: RoomDatabase con `entities=[GarmentEntity]`, version 1; documenta política `exportSchema`)
+- [X] T008 [P] Create `FilePhotoDataSource` in `app/src/main/java/com/wearingdrape/app/data/FilePhotoDataSource.kt` (copia a `filesDir/closet/` como `garment_<id>_<timestamp>.<ext>`; valida JPEG/PNG/WebP y `≤5 MB`; borra el fichero copiado si el insert posterior falla)
+- [X] T009 Create `StaticCatalogDataSource` in `app/src/main/java/com/wearingdrape/app/data/StaticCatalogDataSource.kt` (depends on T004: expone `specificsByGeneral` y `fitsByGeneral` desde `Catalog.kt`)
+- [X] T010 Create `GarmentRepository` in `app/src/main/java/com/wearingdrape/app/data/GarmentRepository.kt` (depends on T006–T009: único punto de entrada a Data; expone `Flow<List<Garment>>`; `save()` valida obligatorios y hace guardado atómico copia-foto→insert sin fila parcial)
+- [X] T011 Create `Application` holder + register in `app/src/main/AndroidManifest.xml` (depends on T007/T010: singleton de `AppDatabase`/repositorio para factory manual de ViewModels, sin Hilt/Koin)
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -58,11 +58,11 @@
 
 ### Implementation for User Story 1
 
-- [ ] T012 [P] [US1] Create `ClosetListViewModel` in `app/src/main/java/com/wearingdrape/app/ui/closet/ClosetListViewModel.kt` (UDF con `StateFlow`: estados `Empty` / `Content(items)` desde repositorio; `Content` orden `createdAt` desc)
-- [ ] T013 [P] [US1] Create `ClosetListScreen` in `app/src/main/java/com/wearingdrape/app/ui/closet/ClosetListScreen.kt` (depends on T012 contrato: `LazyColumn` de tarjetas con miniatura Coil o marcador "imagen no disponible", `name` + `specific` + `color`; estado `Empty` con texto "aún no hay prendas" + CTA "Agregar prenda"; tarjetas reflejan snapshot guardado)
-- [ ] T014 [US1] Create `AddGarmentViewModel` in `app/src/main/java/com/wearingdrape/app/ui/addgarment/AddGarmentViewModel.kt` (depends on T010: `AddGarmentUiState` con `name` 1–60, `generalKey`, `specific`, `color` 1–40, `photoUri?`, `fieldErrors` por campo, `isSaving` que bloquea doble submit, `saveResult OK|ERROR`)
-- [ ] T015 [US1] Create `AddGarmentScreen` form in `app/src/main/java/com/wearingdrape/app/ui/addgarment/AddGarmentScreen.kt` (depends on T014: campos + `PickVisualMedia` con fallback `GetContent` en API 29; foto inválida → error claro sin perder datos; cancelar → confirma "los cambios se perderán" y descarta sin fila)
-- [ ] T016 [US1] Wire `NavHost` in `app/src/main/java/com/wearingdrape/app/MainActivity.kt` (depends on T013/T015: rutas `closet` start + `addGarment`; `OK` → `popBackStack` + snackbar "Prenda guardada")
+- [X] T012 [P] [US1] Create `ClosetListViewModel` in `app/src/main/java/com/wearingdrape/app/ui/closet/ClosetListViewModel.kt` (UDF con `StateFlow`: estados `Empty` / `Content(items)` desde repositorio; `Content` orden `createdAt` desc)
+- [X] T013 [P] [US1] Create `ClosetListScreen` in `app/src/main/java/com/wearingdrape/app/ui/closet/ClosetListScreen.kt` (depends on T012 contrato: `LazyColumn` de tarjetas con miniatura Coil o marcador "imagen no disponible", `name` + `specific` + `color`; estado `Empty` con texto "aún no hay prendas" + CTA "Agregar prenda"; tarjetas reflejan snapshot guardado)
+- [X] T014 [US1] Create `AddGarmentViewModel` in `app/src/main/java/com/wearingdrape/app/ui/addgarment/AddGarmentViewModel.kt` (depends on T010: `AddGarmentUiState` con `name` 1–60, `generalKey`, `specific`, `color` 1–40, `photoUri?`, `fieldErrors` por campo, `isSaving` que bloquea doble submit, `saveResult OK|ERROR`)
+- [X] T015 [US1] Create `AddGarmentScreen` form in `app/src/main/java/com/wearingdrape/app/ui/addgarment/AddGarmentScreen.kt` (depends on T014: campos + `PickVisualMedia` con fallback `GetContent` en API 29; foto inválida → error claro sin perder datos; cancelar → confirma "los cambios se perderán" y descarta sin fila)
+- [X] T016 [US1] Wire `NavHost` in `app/src/main/java/com/wearingdrape/app/MainActivity.kt` (depends on T013/T015: rutas `closet` start + `addGarment`; `OK` → `popBackStack` + snackbar "Prenda guardada")
 - [ ] T017 [US1] Run quickstart §2 manual validation in emulator API 29+ (registro <2 min, 4 rechazos por campo faltante, rechazo no-imagen; `assembleDebug` + `lintDebug` en verde)
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
@@ -77,9 +77,9 @@
 
 ### Implementation for User Story 2
 
-- [ ] T018 [US2] Implement coherence validation in `app/src/main/java/com/wearingdrape/app/data/GarmentRepository.kt` (`specific` MUST ∈ `specificsByGeneral[generalKey]` y `fit` informado MUST ∈ `fitsByGeneral[generalKey]`; rechaza intrusas tipo "superior + tenis"; grupo sin opciones → guardado con mensaje "aún no hay opciones para este grupo" en selector, sin fallo)
-- [ ] T019 [P] [US2] Filtered specific/fit selectors in `app/src/main/java/com/wearingdrape/app/ui/addgarment/AddGarmentScreen.kt` (sin `generalKey` → pide elegir general primero; con general → 100% opciones del grupo; nunca sugerir fits de otro grupo como opción principal)
-- [ ] T020 [US2] Implement `OnGeneralChange` reset in `app/src/main/java/com/wearingdrape/app/ui/addgarment/AddGarmentViewModel.kt` (depends on T018: si `specific`/`fit` previos no pertenecen al nuevo grupo → se limpian y se informa al usuario, FR-006)
+- [X] T018 [US2] Implement coherence validation in `app/src/main/java/com/wearingdrape/app/data/GarmentRepository.kt` (`specific` MUST ∈ `specificsByGeneral[generalKey]` y `fit` informado MUST ∈ `fitsByGeneral[generalKey]`; rechaza intrusas tipo "superior + tenis"; grupo sin opciones → guardado con mensaje "aún no hay opciones para este grupo" en selector, sin fallo)
+- [X] T019 [P] [US2] Filtered specific/fit selectors in `app/src/main/java/com/wearingdrape/app/ui/addgarment/AddGarmentScreen.kt` (sin `generalKey` → pide elegir general primero; con general → 100% opciones del grupo; nunca sugerir fits de otro grupo como opción principal)
+- [X] T020 [US2] Implement `OnGeneralChange` reset in `app/src/main/java/com/wearingdrape/app/ui/addgarment/AddGarmentViewModel.kt` (depends on T018: si `specific`/`fit` previos no pertenecen al nuevo grupo → se limpian y se informa al usuario, FR-006)
 - [ ] T021 [US2] Run quickstart §3 manual validation in emulator API 29+ (matriz 4 grupos sin intrusas, invalidación al cambiar general, coherencia de guardadas)
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
@@ -94,9 +94,9 @@
 
 ### Implementation for User Story 3
 
-- [ ] T022 [P] [US3] Add `fit` (String? opcional) + `notes` (0–500 opcional) to state/save in `app/src/main/java/com/wearingdrape/app/ui/addgarment/AddGarmentViewModel.kt` (guardado OK con ambos vacíos)
-- [ ] T023 [US3] Add fit + notes inputs in `app/src/main/java/com/wearingdrape/app/ui/addgarment/AddGarmentScreen.kt` (depends on T022: sugerencias de fit del grupo; `CALZADO`/`ACCESORIO` sin sugerencias — campo libre u oculto)
-- [ ] T024 [US3] Display fit + notes in `app/src/main/java/com/wearingdrape/app/ui/closet/ClosetListScreen.kt` (texto exacto guardado; foto ausente sigue con marcador)
+- [X] T022 [P] [US3] Add `fit` (String? opcional) + `notes` (0–500 opcional) to state/save in `app/src/main/java/com/wearingdrape/app/ui/addgarment/AddGarmentViewModel.kt` (guardado OK con ambos vacíos)
+- [X] T023 [US3] Add fit + notes inputs in `app/src/main/java/com/wearingdrape/app/ui/addgarment/AddGarmentScreen.kt` (depends on T022: sugerencias de fit del grupo; `CALZADO`/`ACCESORIO` sin sugerencias — campo libre u oculto)
+- [X] T024 [US3] Display fit + notes in `app/src/main/java/com/wearingdrape/app/ui/closet/ClosetListScreen.kt` (texto exacto guardado; foto ausente sigue con marcador)
 - [ ] T025 [US3] Run quickstart §4 manual validation in emulator API 29+ (ambos casos visibles)
 
 **Checkpoint**: All user stories should now be independently functional
@@ -107,10 +107,12 @@
 
 **Purpose**: Higiene final y validación cruzada de SC/edge cases
 
-- [ ] T026 Run `gradlew.bat assembleDebug` + `gradlew.bat lintDebug` green and fix all `Error` issues from repo root
-- [ ] T027 [P] Run full `specs/001-add-garment-closet/quickstart.md` validation pass (§1–§5) in emulator API 29+ including edge cases (nombres duplicados permitidos como registros independientes; límites nombre >60 / color >40 / observaciones >500 informados; cancelar no guarda; foto borrada → marcador)
-- [ ] T028 [P] Update `README.md` with 001 run/verify notes and pinned dependency versions from `gradle/libs.versions.toml`
-- [ ] T029 Audit user-visible strings into `app/src/main/res/values/strings.xml` in Spanish (no hardcoded UI text in screens)
+- [X] T026 Run `gradlew.bat assembleDebug` + `gradlew.bat lintDebug` green and fix all `Error` issues from repo root
+- [ ] T027 [P] Run full `specs/001-add-garment-closet/quickstart.md` validation pass (§1–§5) in emulator API 29+ including edge cases (nombres duplicados permitidos como registros independientes; límites nombre >60 / observaciones >500 informados; color desde picker sin texto libre; cancelar no guarda; foto borrada → marcador)
+- [X] T028 [P] Update `README.md` with 001 run/verify notes and pinned dependency versions from `gradle/libs.versions.toml`
+- [X] T029 Audit user-visible strings into `app/src/main/res/values/strings.xml` in Spanish (no hardcoded UI text in screens)
+- [X] T030 Color picker (FR-011): paleta de hexadecimales en `data/Catalog.kt` (`colorOptions`), validación de pertenencia en `GarmentRepository`, picker de muestras en `AddGarmentScreen` en vez de texto libre y muestra de color en la tarjeta de `ClosetListScreen`; spec/contrato/data-model/quickstart actualizados
+- [X] T031 Tabs por tipo general (US1-A4): `Todas` + 4 grupos en `TabRow` de `ClosetListScreen`, filtrado en `ClosetListViewModel.selectedTab`; spec/contrato/quickstart actualizados
 
 ---
 

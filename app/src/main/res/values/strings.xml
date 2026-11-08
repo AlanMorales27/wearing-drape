@@ -1,4 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">wearing-drape</string>
+    <!-- 001: closet / agregar prenda -->
+    <string name="closet_empty">aún no hay prendas</string>
+    <string name="tab_all">Todas</string>
+    <string name="add_garment">Agregar prenda</string>
+    <string name="garment_saved">Prenda guardada</string>
+    <string name="image_unavailable">imagen no disponible</string>
+    <string name="pick_photo">Elegir foto</string>
+    <string name="field_name">Nombre</string>
+    <string name="field_general">Tipo general</string>
+    <string name="field_specific">Tipo específico</string>
+    <string name="field_color">Color</string>
+    <string name="field_fit_optional">Fit (opcional)</string>
+    <string name="field_notes_optional">Observaciones (opcional)</string>
+    <string name="general_superior">prenda superior</string>
+    <string name="general_inferior">prenda inferior</string>
+    <string name="general_calzado">calzado</string>
+    <string name="general_accesorio">accesorio</string>
+    <string name="choose_general_first">Elige primero el tipo general</string>
+    <string name="no_options_for_group">aún no hay opciones para este grupo</string>
+    <string name="save_garment">Guardar prenda</string>
+    <string name="cancel">Cancelar</string>
+    <string name="cancel_title">Descartar cambios</string>
+    <string name="cancel_message">los cambios se perderán</string>
+    <string name="discard_changes">Descartar</string>
+    <string name="keep_editing">Seguir editando</string>
+    <string name="general_reset_specific">Se limpió el tipo específico porque no pertenece a este grupo.</string>
+    <string name="general_reset_fit">Se limpió el fit porque no es de este grupo.</string>
 </resources>

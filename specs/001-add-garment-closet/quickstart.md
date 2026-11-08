@@ -23,10 +23,11 @@ gradlew.bat lintDebug
 ## 2. US1 — Guardar prenda completa con foto (SC-001, SC-003)
 
 1. Abrir la app → se ve la lista del closet (vacía: "aún no hay prendas").
-2. Tocar "Agregar prenda", completar nombre + general (p. ej. superior) + específico + color, adjuntar 1 foto válida y guardar. Cronometrar desde que se abre el formulario.
-3. ✅ Esperado: prenda guardada y visible en la lista con miniatura + nombre + específico + color (<2 min, SC-001); snackbar "Prenda guardada".
-4. Repetir sin nombre / sin general / sin específico / sin color → cada intento muestra qué campo falta y conserva el resto (US1-A2, FR-008).
-5. Adjuntar el archivo no-imagen → rechazo con mensaje claro, resto del formulario intacto (US1-A3, FR-007).
+2. Tocar "Agregar prenda", completar nombre + general (p. ej. superior) + específico + elegir color del picker, adjuntar 1 foto válida y guardar. Cronometrar desde que se abre el formulario.
+3. ✅ Esperado: prenda guardada y visible en la lista con miniatura + muestra de color + nombre + específico + color (<2 min, SC-001); snackbar "Prenda guardada".
+4. Tocar cada tab (Todas, superior, inferior, calzado, accesorio) → cada tab muestra solo prendas de su grupo; Todas las muestra todas (US1-A4).
+5. Repetir sin nombre / sin general / sin específico / sin color → cada intento muestra qué campo falta y conserva el resto (US1-A2, FR-008).
+6. Adjuntar el archivo no-imagen → rechazo con mensaje claro, resto del formulario intacto (US1-A3, FR-007).
 
 ## 3. US2 — Filtrado por tipo general (SC-002, SC-004)
 
@@ -45,7 +46,7 @@ gradlew.bat lintDebug
 ## 5. Casos borde (spot-check)
 
 - Nombre duplicado → permitido, dos registros independientes.
-- Texto muy largo (nombre >60, color >40, observaciones >500) → límite informado antes de guardar.
+- Texto muy largo (nombre >60, observaciones >500) → límite informado antes de guardar (el color viene del picker, sin texto libre).
 - Cancelar a mitad → nada guardado + confirmación de pérdida de cambios.
 - Foto borrada del almacenamiento → la prenda sigue con marcador "imagen no disponible".
 

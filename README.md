@@ -1,9 +1,12 @@
-# wearing-drape — Base Android (spec 000)
+# wearing-drape — Base Android + closet local (specs 000 y 001)
 
 Esqueleto mínimo compilable y ejecutable de la app Android en Kotlin (spec
 [`000-android-kotlin-base`](specs/000-android-kotlin-base/spec.md)): un solo
-módulo `:app` con `MainActivity` + pantalla de bienvenida en Compose
-Material3. Sin tests automatizados por decisión del autor (verificación
+módulo `:app` con navegación Compose (lista del closet + formulario
+"agregar prenda") y persistencia solo local con Room + fotos en
+almacenamiento interno (spec
+[`001-add-garment-closet`](specs/001-add-garment-closet/spec.md)).
+Sin tests automatizados por decisión del autor (verificación
 manual vía Run); se introducirán en un spec posterior.
 
 ## Versiones pineadas
@@ -15,6 +18,10 @@ manual vía Run); se introducirán en un spec posterior.
 | Kotlin | 2.2.10 embebido en AGP ("built-in Kotlin", **no** se aplica `kotlin-android`) | AGP 9.5.0 |
 | Compose compiler plugin | 2.2.10 (debe coincidir con el Kotlin embebido) | `libs.versions.toml` (`kotlin`) |
 | Compose BOM | 2026.09.00 | `libs.versions.toml` (`composeBom`) |
+| KSP | 2.2.10-2.0.2 (debe coincidir con el Kotlin embebido) | `libs.versions.toml` (`ksp`) |
+| Room | 2.8.4 | `libs.versions.toml` (`room`) |
+| navigation-compose | 2.9.8 | `libs.versions.toml` (`navigationCompose`) |
+| coil-compose (Coil 3) | 3.4.0 (última con Kotlin ≤2.3) | `libs.versions.toml` (`coil`) |
 | compileSdk / targetSdk | 37 | `app/build.gradle.kts` |
 | minSdk | 29 (Android 10) | `app/build.gradle.kts` |
 | JDK para correr Gradle | 17+ (probado con el JBR 25 de Android Studio) | `JAVA_HOME` o JDK de Studio |
@@ -47,9 +54,37 @@ REM 4. Arrancar el emulador y pulsar Run 'app' en Studio.
 
 - ✅ Esperado: módulo `app` listado, Sync sin errores, `BUILD SUCCESSFUL`
   en ambas tareas, APK en `app\build\outputs\apk\debug\app-debug.apk`,
-  bienvenida con el nombre de la app visible en <2 s, sin crash (ni en
-  rotación).
-- Detalle de contratos: `specs/000-android-kotlin-base/contracts/`.
+  lista del closet visible en <2 s ("aún no hay prendas" si está vacía),
+  sin crash (ni en rotación).
+- Detalle de contratos 000: `specs/000-android-kotlin-base/contracts/`.
+
+## Funcionalidad 001: agregar prenda al closet
+
+Formulario "agregar prenda" (foto + nombre + tipo general + tipo
+específico filtrado + color + fit/observaciones opcionales) con guardado
+local atómico (Room + `filesDir/closet/`) y lista mínima donde se ve lo
+guardado. Detalle de validación manual:
+`specs/001-add-garment-closet/quickstart.md` (§1–§5).
+
+```bat
+REM Verificación rápida 001 (desde la raíz del repo):
+gradlew.bat assembleDebug
+gradlew.bat lintDebug
+```
+
+- ✅ Esperado: `BUILD SUCCESSFUL` en ambas; `lintDebug` sin `Error`;
+  la app abre la lista del closet, "Agregar prenda" guarda en <2 min y
+  la prenda aparece con miniatura + nombre + específico + color;
+  los filtros por tipo general nunca mezclan grupos (SC-004).
+- Notas de implementación:
+  - `android.disallowKotlinSourceSets=false` en `gradle.properties`:
+    AGP 9.5 con built-in Kotlin lo exige para los sources generados por
+    KSP (Room); sin esa flag el Sync falla con "Using kotlin.sourceSets
+    DSL to add Kotlin sources is not allowed".
+  - Sin Hilt/Koin: el grafo vive en `WearingDrapeApp`
+    (`AppDatabase` + `GarmentRepository`) con factory manual de ViewModels.
+  - Catálogo estático en `data/Catalog.kt`; las prendas guardan snapshot
+    (agregar opciones no toca prendas existentes, FR-013).
 
 ### `local.properties` (no versionado)
 
@@ -65,7 +100,8 @@ sdk.dir=C\:\\Users\\<tu-usuario>\\AppData\\Local\\Android\\Sdk
 
 ## Dónde irán los secretos (spec 001+)
 
-En 000 **no hay secretos**. Cuando 001 necesite Supabase:
+En 000 y 001 **no hay secretos**: 001 persiste solo en local (Room +
+ficheros internos, sin backend). Cuando un spec futuro necesite Supabase:
 
 - `SUPABASE_URL` y `SUPABASE_ANON_KEY` irán en `local.properties` /
   variables de entorno, **nunca** en código versionado.
@@ -73,13 +109,16 @@ En 000 **no hay secretos**. Cuando 001 necesite Supabase:
 - `.gitignore` ya cubre `local.properties`, `*.jks`/`*.keystore`, `build/`,
   `.gradle/` y `.idea/` sensible.
 
-## Punto de extensión para 001
+## Estructura UI/Data (spec 001)
 
-- UI nueva: `app/src/main/java/com/wearingdrape/app/ui/` — la pantalla
-  `ui/welcome/WelcomeScreen.kt` es el ejemplo a seguir.
+- UI nueva: `app/src/main/java/com/wearingdrape/app/ui/` —
+  `closet/` (lista mínima) + `addgarment/` (formulario). La pantalla
+  `ui/welcome/` de 000 queda sin uso en la navegación (se conserva
+  como referencia mínima).
 - Sin ViewModels, repositorios ni data sources vacíos por anticipado
-  (YAGNI): se crean cuando 001 los necesite, con UI → Domain (opcional) →
-  Data según la constitución (`ui` nunca accede a data sources directos).
+  (YAGNI): la capa Data (`data/` + `GarmentRepository` como único punto
+  de entrada) se creó con 001, con UI → Data según la constitución
+  (`ui` nunca accede a data sources directos).
 
 ## Troubleshooting (Windows)
 
